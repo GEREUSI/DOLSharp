@@ -161,7 +161,8 @@ namespace DOL.GS
 			Version1124 = 1124,
 			Version1125 = 1125,
 			Version1126 = 1126,
-			_LastVersion = 1126,
+			Version1127 = 1127,
+			_LastVersion = 1127,
 		}
 
 		#endregion
@@ -180,6 +181,10 @@ namespace DOL.GS
 		/// This variable holds the active charindex
 		/// </summary>
 		protected int m_activeCharIndex;
+		
+		
+		public bool CharSelectRequest { get; set; }
+		public bool RegionsRequested { get; set; }
 
 		/// <summary>
 		/// Holds installed client addons

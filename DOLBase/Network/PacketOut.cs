@@ -74,6 +74,20 @@ namespace DOL.Network
 			WriteByte((byte) (val & 0xff));
 			WriteByte((byte) (val >> 8));
 		}
+		
+		public virtual void WritePascalStringIntLowEndian(string str)
+        {
+            if (str == null || str.Length <= 0)
+            {
+                WriteByte(0);
+                return;
+            }
+
+            byte[] bytes = Constants.DefaultEncoding.GetBytes(str);
+            WriteIntLowEndian((uint)bytes.Length + 1);
+            Write(bytes, 0, bytes.Length);
+            WriteByte(0);
+        }
 
 		/// <summary>
 		/// Writes a 4 byte value to the stream in host byte order

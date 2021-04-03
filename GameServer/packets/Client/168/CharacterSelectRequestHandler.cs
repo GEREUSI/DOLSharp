@@ -29,9 +29,10 @@ namespace DOL.GS.PacketHandler.Client.v168
 		{
 			if (client.Version >= GameClient.eClientVersion.Version1126)
 			{
-				client.Out.SendSessionID();
+				var charSelectRequest = new CharacterSelectRequestHandler1126();
+				charSelectRequest.HandlePacket(client, packet);
 				return;
-			}
+			}   
 			// 1125d support TODO this needs to be changed when a version greater than 1125d comes out
 			if (client.Version >= GameClient.eClientVersion.Version1125)
 			{
@@ -159,4 +160,53 @@ namespace DOL.GS.PacketHandler.Client.v168
 			}
 		}
 	}
+	
+    public class CharacterSelectRequestHandler1126 : IPacketHandler
+    {        
+        public void HandlePacket(GameClient client, GSPacketIn packet)
+        {
+            if (!client.CharSelectRequest)
+            {
+                client.Out.SendLoginGranted();
+                client.Out.SendSessionID();
+                client.CharSelectRequest = true;
+                return;
+            }
+            else if (!client.RegionsRequested)
+            {
+                client.Out.SendSessionID();
+                return;
+            }
+            byte charIndex = (byte)packet.ReadByte();
+
+            if (client.Player == null && client.Account.Characters != null && client.ClientState == GameClient.eClientState.CharScreen)
+            {                
+                bool charFound = false;
+                int realmOffset = charIndex - (client.Account.Realm * 10 - 10);
+                int charSlot = (client.Account.Realm * 100) + realmOffset;
+                for (int i = 0; i < client.Account.Characters.Length; i++)
+                {
+                    if (client.Account.Characters[i] != null && client.Account.Characters[i].AccountSlot == charSlot)
+                    {
+                        charFound = true;
+                        client.LoadPlayer(i);
+                        break;
+                    }
+                }
+
+                if (!charFound)
+                {
+                    client.Player = null;
+                    client.ActiveCharIndex = -1;
+                }
+                else
+                {
+                    // Log character play
+                    AuditMgr.AddAuditEntry(client, AuditType.Character, AuditSubtype.CharacterLogin, "", client.Account.Characters[charIndex].Name);
+                }
+            }
+
+            client.Out.SendSessionID();
+        }
+    }
 }
