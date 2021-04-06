@@ -40,16 +40,10 @@ namespace DOL.GS.PacketHandler.Client.v168
 				return;
 
 			ushort sessionId = packet.ReadShort(); // session ID
-			ushort currentTarget = 0;
 			if (client.SessionID != sessionId)
 			{
 //				GameServer.BanAccount(client, 120, "Hack sessionId", string.Format("Wrong sessionId:0x{0} in 0xBA packet (SessionID:{1})", sessionId, client.SessionID));
 				return; // client hack
-			}
-			
-			if (client.Version >= GameClient.eClientVersion.Version1127)
-			{
-				currentTarget = packet.ReadShort();
 			}
 
 			ushort head = packet.ReadShort();
@@ -94,20 +88,6 @@ namespace DOL.GS.PacketHandler.Client.v168
 				flagcontent |= 0x04;
 			if (client.Player.IsTorchLighted)
 				flagcontent |= 0x80;
-			
-			GSUDPPacketOut outpak1127 = new GSUDPPacketOut(client.Out.GetPacketCode(eServerPackets.PlayerHeading));
-			outpak1127.WriteShort((ushort)client.SessionID);
-			outpak1127.WriteShort(currentTarget); // 1127 
-			outpak1127.WriteShort(client.Player.Heading);
-			outpak1127.WriteByte(steedSlot);
-			outpak1127.WriteByte((byte)flags);
-			outpak1127.WriteByte(0);
-			outpak1127.WriteByte(ridingFlag);
-			outpak1127.WriteByte(client.Player.HealthPercent);
-			outpak1127.WriteByte(client.Player.ManaPercent);
-			outpak1127.WriteByte(client.Player.EndurancePercent);
-			outpak1127.WriteByte(0);
-			outpak1127.WritePacketLength();
 
 			GSUDPPacketOut outpak190 = new GSUDPPacketOut(client.Out.GetPacketCode(eServerPackets.PlayerHeading));
 			outpak190.WriteShort((ushort) client.SessionID);
@@ -139,18 +119,10 @@ namespace DOL.GS.PacketHandler.Client.v168
 			{
 				if(player != null && player != client.Player)
 				{
-					if (player.Client.Version == GameClient.eClientVersion.Version1127)
-					{
-						player.Out.SendUDPRaw(outpak1127);
-					} 
-					else if (player.Client.Version >= GameClient.eClientVersion.Version1124)
-					{
+					if (player.Client.Version >= GameClient.eClientVersion.Version1124)
 						player.Out.SendUDP(outpak);
-					}
 					else
-					{
 						player.Out.SendUDP(outpak190);
-					}
 				}
 			}
 		}

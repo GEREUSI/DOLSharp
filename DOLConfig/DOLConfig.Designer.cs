@@ -1733,6 +1733,7 @@
 			this.Controls.Add(this.save_config_button);
 			this.Controls.Add(this.statusStrip1);
 			this.Controls.Add(this.tabControl1);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MinimumSize = new System.Drawing.Size(450, 550);
 			this.Name = "DolConfig";
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;

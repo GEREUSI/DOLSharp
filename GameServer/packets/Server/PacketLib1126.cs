@@ -294,39 +294,22 @@ namespace DOL.GS.PacketHandler
 
 		public override void SendRegions()
 		{
-			// if (!m_gameClient.Socket.Connected || m_gameClient.Player == null)
-			// 	return;
-			
-			// Region region = WorldMgr.GetRegion(m_gameClient.Player.CurrentRegionID);
-			// if (region == null)
-			// 	return;
+			if (!m_gameClient.Socket.Connected || m_gameClient.Player == null)
+				return;
+
+			Region region = WorldMgr.GetRegion(m_gameClient.Player.CurrentRegionID);
+			if (region == null)
+				return;
 			using (GSTCPPacketOut pak = new GSTCPPacketOut(GetPacketCode(eServerPackets.ClientRegion)))
 			{
-				string ip = ((IPEndPoint)m_gameClient.Socket.LocalEndPoint).Address.ToString();
-				uint port = (uint)((IPEndPoint) m_gameClient.Socket.LocalEndPoint).Port;
-				//var ip = region.ServerIP;
+				var ip = region.ServerIP;
 				if (ip == "any" || ip == "0.0.0.0" || ip == "127.0.0.1" || ip.StartsWith("10.") || ip.StartsWith("192.168."))
 					ip = ((IPEndPoint)m_gameClient.Socket.LocalEndPoint).Address.ToString();
 				pak.WritePascalStringIntLE(ip);
-				pak.WriteIntLowEndian(port);
-				pak.WriteIntLowEndian(port);
+				pak.WriteIntLowEndian(region.ServerPort);
+				pak.WriteIntLowEndian(region.ServerPort);
 				SendTCP(pak);
 			}
-	
-
-			// using (GSTCPPacketOut pak = new GSTCPPacketOut(GetPacketCode(eServerPackets.StartArena)))
-			// {                
-			// 	string ip = ((IPEndPoint)m_gameClient.Socket.LocalEndPoint).Address.ToString();
-   //              
-			// 	pak.WritePascalStringIntLowEndian(ip);
-			// 	pak.WriteShort(10400); // from port?
-			// 	pak.WriteByte(0); // ??
-			// 	pak.WriteByte(0);  // ??
-			// 	pak.WriteShort(10400);  // ?? to port?
-			// 	pak.WriteByte(0);  // ??
-			// 	pak.WriteByte(0);  // ??
-			// 	SendTCP(pak);
-			// }           
 		}
 
 		/// <summary>
