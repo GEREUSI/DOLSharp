@@ -31,6 +31,7 @@ using DOL.GS.ServerRules;
 using DOL.GS.Spells;
 using DOL.GS.Commands;
 using DOL.Events;
+using GameServerUtility;
 using log4net;
 using Microsoft.CSharp;
 using Microsoft.VisualBasic;
@@ -257,6 +258,7 @@ namespace DOL.GS
 		{
 			try
 			{
+				Utility.COMMAND_LOG(cmdLine);
 				// parse args
 				string[] pars = ParseCmdLine(cmdLine);
 				GameCommand myCommand = GuessCommand(pars[0]);

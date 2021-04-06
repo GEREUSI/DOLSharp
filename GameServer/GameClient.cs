@@ -184,7 +184,6 @@ namespace DOL.GS
 		
 		
 		public bool CharSelectRequest { get; set; }
-		public bool RegionsRequested { get; set; }
 
 		/// <summary>
 		/// Holds installed client addons
