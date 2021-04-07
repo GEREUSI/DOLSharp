@@ -17,6 +17,7 @@
  *
  */
 using System;
+using GameServerUtility;
 
 
 namespace DOL.GS.PacketHandler.Client.v168
@@ -26,8 +27,32 @@ namespace DOL.GS.PacketHandler.Client.v168
 	{
 		public void HandlePacket(GameClient client, GSPacketIn packet)
 		{
+			if (client.Version >= GameClient.eClientVersion.Version1127)
+			{
+				var playerCommandHandler1127 = new PlayerCommandHandler1127();
+				playerCommandHandler1127.HandlePacket(client, packet);
+				return;
+				
+			}
+			
 			packet.Skip(8);
 			string cmdLine = packet.ReadString(255);
+			if(!ScriptMgr.HandleCommand(client, cmdLine))
+			{
+				if (cmdLine[0] == '&')
+					cmdLine = "/" + cmdLine.Remove(0, 1);
+				client.Out.SendMessage($"No such command ({cmdLine})", eChatType.CT_System,eChatLoc.CL_SystemWindow);
+			}
+		}
+	}
+
+	public class PlayerCommandHandler1127 : IPacketHandler
+	{
+		public void HandlePacket(GameClient client, GSPacketIn packet)
+		{
+			packet.Skip(1);
+			string cmdLine = packet.ReadString(255);
+			Utility.DEBUG_LOG(cmdLine);
 			if(!ScriptMgr.HandleCommand(client, cmdLine))
 			{
 				if (cmdLine[0] == '&')

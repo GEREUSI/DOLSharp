@@ -13,7 +13,7 @@ namespace GameServerUtility
         public static void DEBUG_LOG(string message) => Log.Info($"DEV_DEBUG || {message}");
         public static void PACKET_LOG(GSPacketIn packet)
         {
-            if (packet.ID == (int) eClientPackets.PingRequest)
+            if (packet.ID == (int) eClientPackets.PingRequest || packet.ID == (int) eClientPackets.PositionUpdate)
             {
                 return;
             }
