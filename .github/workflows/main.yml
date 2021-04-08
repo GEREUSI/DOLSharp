@@ -35,4 +35,4 @@ jobs:
             registry-password: ${{ secrets.REGISTRY_PASSWORD }}
             name: aci-daoc-server
             location: 'germanywestcentral'
-            port: 10300
+            ports: 10300
