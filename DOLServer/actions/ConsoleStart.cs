@@ -69,6 +69,7 @@ namespace DOL.DOLServer.Actions
 			return start;
 		}
 
+		// ReSharper disable once FunctionNeverReturns
 		public void OnAction(Hashtable parameters)
 		{
 			Console.WriteLine("Starting GameServer ... please wait a moment!");
@@ -98,62 +99,13 @@ namespace DOL.DOLServer.Actions
 				if (File.Exists(currentAssembly.DirectoryName + Path.DirectorySeparatorChar + "DOLConfig.exe"))
 				{
 					Console.WriteLine("No config file found, launching with default config and embedded database... (SQLite)");
-					/*
-					// Removed to allow the auto config on embedded SQLite
-					Console.WriteLine("No config file found, launching DOLConfig.exe...");
-					System.Diagnostics.Process.Start(currentAssembly.DirectoryName + Path.DirectorySeparatorChar + "DOLConfig.exe");
-					return;
-					*/
 				}
 			}
 
 			GameServer.CreateInstance(config);
 			StartServer();
 
-			bool run = true;
-			while (run)
-			{
-				Console.Write("> ");
-				string line = Console.ReadLine();
-
-				switch (line.ToLower())
-				{
-					case "exit":
-						run = false;
-						break;
-					case "stacktrace":
-						log.Debug(PacketProcessor.GetConnectionThreadpoolStacks());
-						break;
-					case "clear":
-						Console.Clear();
-						break;
-					default:
-						if (line.Length <= 0)
-							break;
-						if (line[0] == '/')
-						{
-							line = line.Remove(0, 1);
-							line = line.Insert(0, "&");
-						}
-						GameClient client = new GameClient(null);
-						client.Out = new ConsolePacketLib();
-						try
-						{
-							bool res = ScriptMgr.HandleCommandNoPlvl(client, line);
-							if (!res)
-							{
-								Console.WriteLine("Unknown command: " + line);
-							}
-						}
-						catch (Exception e)
-						{
-							Console.WriteLine(e.ToString());
-						}
-						break;
-				}
-			}
-			if (GameServer.Instance != null)
-				GameServer.Instance.Stop();
+			while (true) { }
 		}
 	}
 }
