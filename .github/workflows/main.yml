@@ -1,4 +1,7 @@
-on: [push]
+on:
+    push:
+        branches:
+            - master
 name: DAOC_Server_Workflow
 
 jobs:
@@ -28,7 +31,7 @@ jobs:
           uses: 'azure/aci-deploy@v1'
           with:
             resource-group: ${{ secrets.RESOURCE_GROUP }}
-            dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
+            dns-name-label: daocserver
             image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/daoc-server:${{ github.sha }}
             registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
             registry-username: ${{ secrets.REGISTRY_USERNAME }}
