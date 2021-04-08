@@ -44,7 +44,7 @@ namespace DOL.GS.Commands
 				player.Out.SendMessage("Please select the trainer you want to teleport to:", eChatType.CT_Important, eChatLoc.CL_SystemWindow);
 				foreach (var trainer in trainers)
 				{
-					player.Out.SendMessage($"{trainer.Key}) {trainer.Value.Name}", eChatType.CT_Important, eChatLoc.CL_SystemWindow);
+					player.Out.SendMessage(string.Format("{0} {1}",trainer.Key,trainer.Value.Name), eChatType.CT_Important, eChatLoc.CL_SystemWindow);
 				}
 			} 
 			else if (args.Length == 2)
