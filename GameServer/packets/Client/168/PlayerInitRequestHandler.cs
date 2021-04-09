@@ -112,19 +112,14 @@ namespace DOL.GS.PacketHandler.Client.v168
 					SendGuildMessagesToPlayer(player);
 				}
 				SendHouseRentRemindersToPlayer(player);
-				if (player.Level > 1 && Properties.MOTD != "")
-				{
-					player.Out.SendMessage(Properties.MOTD, eChatType.CT_System, eChatLoc.CL_SystemWindow);
-				}
-				else if (player.Level == 1)
-				{
-					player.Out.SendStarterHelp();
-					if (Properties.STARTING_MSG != "")
-						player.Out.SendMessage(Properties.STARTING_MSG, eChatType.CT_System, eChatLoc.CL_PopupWindow);
-				}
+				string startingMessage = "Welcome to Vilnius Tech Dark Age of Camelot PVP server.";
+				player.Out.SendMessage(startingMessage, eChatType.CT_System, eChatLoc.CL_PopupWindow);
 
 				if (Properties.ENABLE_DEBUG)
-					player.Out.SendMessage("Server is running in DEBUG mode!", eChatType.CT_System, eChatLoc.CL_SystemWindow);
+				{
+					player.Out.SendMessage("Server is running in DEBUG mode!", eChatType.CT_System,
+						eChatLoc.CL_SystemWindow);
+				}
 
 				player.Out.SendPlayerFreeLevelUpdate();
 				if (player.FreeLevelState == 2)
