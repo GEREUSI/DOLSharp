@@ -81,13 +81,10 @@ namespace DOL.GS.PacketHandler.Client.v168
 
 		private static DOLCharacters FindCharacter(GameClient client, int charSlot)
 		{
-			Utility.DEBUG_LOG($"Char Slot: {charSlot}");
 			foreach (DOLCharacters character in client.Account.Characters)
 			{
 				if (character != null && character.AccountSlot == charSlot)
 				{
-					Utility.DEBUG_LOG(character.ToString());
-					Utility.DEBUG_LOG(character.AccountSlot.ToString());
 					client.LoadPlayer(character);
 					return character;
 				}
