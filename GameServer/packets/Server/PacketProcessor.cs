@@ -931,7 +931,9 @@ namespace DOL.GS.PacketHandler
 			if (packet == null || m_client == null)
 				return;
 			
+#if DEBUG
 			GameServerUtility.Utility.PACKET_LOG(packet);
+#endif
 
 			int code = packet.ID;
 
