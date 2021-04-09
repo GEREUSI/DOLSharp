@@ -59,9 +59,9 @@ namespace DOL.GS.GameEvents
 				return;
 			switch (player.Realm)
 			{
-				case eRealm.Albion: player.MoveTo(238, 562576, 573860, 5408, 3026);; break;
-				case eRealm.Midgard: player.MoveTo(238, 570944, 540963, 5408, 1058);; break;
-				case eRealm.Hibernia: player.MoveTo(238, 533492, 534970, 5408, 2491);; break;
+				case eRealm.Albion: player.MoveTo(238, 563499, 573780, 5408, 4094);; break;
+				case eRealm.Midgard: player.MoveTo(238, 570011, 541058, 5408, 2059);; break;
+				case eRealm.Hibernia: player.MoveTo(238, 534198, 534372, 5408, 1521);; break;
 			}
 			
 		}
