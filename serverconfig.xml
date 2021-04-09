@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <Server>
+    <Port>10300</Port>
+    <IP>0.0.0.0</IP>
+    <RegionIP>0.0.0.0</RegionIP>
+    <RegionPort>10400</RegionPort>
+    <UdpIP>0.0.0.0</UdpIP>
+    <UdpPort>10400</UdpPort>
+    <EnableUPnP>False</EnableUPnP>
+    <DetectRegionIP>True</DetectRegionIP>
+    <ServerName>Vilnius Tech Shard</ServerName>
+    <ServerNameShort>VTS</ServerNameShort>
+    <LogConfigFile>./config/logconfig.xml</LogConfigFile>
+    <ScriptCompilationTarget>./lib/GameServerScripts.dll</ScriptCompilationTarget>
+    <ScriptAssemblies>System.dll,System.Xml.dll</ScriptAssemblies>
+    <EnableCompilation>True</EnableCompilation>
+    <AutoAccountCreation>True</AutoAccountCreation>
+    <GameType>Normal</GameType>
+    <CheatLoggerName>cheats</CheatLoggerName>
+    <GMActionLoggerName>gmactions</GMActionLoggerName>
+    <InvalidNamesFile>./config/invalidnames.txt</InvalidNamesFile>
+    <DBType>MYSQL</DBType>
+    <DBConnectionString>Server=daocdatabase.germanywestcentral.azurecontainer.io;Port=3306;Database={{db}};User ID={{user}};Password={{password}};Treat Tiny As Boolean=False</DBConnectionString>
+    <DBAutosave>True</DBAutosave>
+    <DBAutosaveInterval>10</DBAutosaveInterval>
+    <CpuUse>4</CpuUse>
+  </Server>
+</root>
