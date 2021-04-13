@@ -133,7 +133,7 @@ namespace DOL.GS.Keeps
 				int iRespawn = 60 * ((Math.Abs(ServerProperties.Properties.GUARD_RESPAWN) * 1000) +
 					(Util.Random(-iVariance, iVariance)));
 
-				guard.RespawnInterval = (iRespawn > 1000) ? iRespawn : 1000; // Make sure we don't end up with an impossibly low respawn interval.
+				guard.RespawnInterval = Util.Random(5, 10) * 60 * 1000; // Make sure we don't end up with an impossibly low respawn interval.
 			}
 		}
 

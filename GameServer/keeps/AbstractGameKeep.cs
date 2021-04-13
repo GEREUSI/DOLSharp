@@ -366,7 +366,7 @@ namespace DOL.GS.Keeps
 
 					return (iRespawn > 1000) ? iRespawn : 1000; // Make sure we don't end up with an impossibly low respawn interval.
 				}
-				return 1000;
+				return 60000;
             }
 		}
 
@@ -1188,7 +1188,7 @@ namespace DOL.GS.Keeps
 					component.Repair(component.MaxHealth - component.Health);
 				foreach (GameKeepHookPoint hp in component.KeepHookPoints.Values)
 				{
-					if (hp.Object != null)
+					if (hp.Object != null && hp.Object.IsAlive)
 						hp.Object.Die(null);
 				}
 			}
@@ -1211,7 +1211,7 @@ namespace DOL.GS.Keeps
 			{
 				if (guard is GuardLord && guard.IsAlive )
 				{
-					this.TemplateManager.GetMethod("RefreshTemplate").Invoke(null, new object[] { guard });
+					TemplateMgr.RefreshTemplate(guard);
 				}
 				else if (guard is GuardLord == false)
 				{

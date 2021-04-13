@@ -293,11 +293,17 @@ namespace DOL.GS.Keeps
 				((GameNPC)hookPointObj).RespawnInterval = -1;//do not respawn
 			}
 			hookPointObj.AddToWorld();
-			if (hookPointObj is GameKeepGuard guard)
+			if (hookPointObj is GuardLord lord)
+			{
+				lord.Component.AbstractKeep.Guards.Add(hookPointObj.ObjectID.ToString(), lord);
+				lord.RespawnInterval = 60 * 1000;
+			} 
+			else if (hookPointObj is GameKeepGuard guard)
 			{
 				guard.Component.AbstractKeep.Guards.Add(hookPointObj.ObjectID.ToString(), guard);
-				guard.RespawnInterval = Util.Random(10, 30) * 60 * 1000;
+				guard.RespawnInterval = Util.Random(5, 10) * 60 * 1000;
 			}
+			
 			hookpoint.Object = hookPointObj;
 
 			//create the db entry
@@ -346,10 +352,15 @@ namespace DOL.GS.Keeps
 				((GameNPC)hookPointObj).RespawnInterval = -1;//do not respawn
 			}
 			hookPointObj.AddToWorld();
-			if (hookPointObj is GameKeepGuard guard)
+			if (hookPointObj is GuardLord lord)
+			{
+				lord.Component.AbstractKeep.Guards.Add(hookPointObj.ObjectID.ToString(), lord);
+				lord.RespawnInterval = 60 * 1000;
+			} 
+			else if (hookPointObj is GameKeepGuard guard)
 			{
 				guard.Component.AbstractKeep.Guards.Add(hookPointObj.ObjectID.ToString(), guard);
-				guard.RespawnInterval = Util.Random(10, 30) * 60 * 1000;
+				guard.RespawnInterval = Util.Random(5, 10) * 60 * 1000;
 			}
 			hookpoint.Object = hookPointObj;
 		}

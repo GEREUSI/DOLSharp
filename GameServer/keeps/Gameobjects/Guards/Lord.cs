@@ -216,7 +216,7 @@ namespace DOL.GS.Keeps
 
 			base.Die(killer);
 
-			if (this.Component != null)
+			if (Component != null && killer != null)
 			{
 				GameServer.ServerRules.ResetKeep(this, killer);
 			}
