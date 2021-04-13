@@ -2,6 +2,8 @@ on:
     push:
         branches:
             - master
+    repository_dispatch:
+        types: [rebuild_server]
 name: DAOC_Server_Workflow
 
 jobs:
