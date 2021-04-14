@@ -42,3 +42,5 @@ jobs:
             location: 'germanywestcentral'
             ports: 10300
             environment-variables: MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }} MYSQL_USER=${{ secrets.MYSQL_USER }} MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}
+            memory: 4
+            cpu: 2
