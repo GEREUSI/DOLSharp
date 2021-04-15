@@ -366,7 +366,7 @@ namespace DOL.GS.Keeps
 
 					return (iRespawn > 1000) ? iRespawn : 1000; // Make sure we don't end up with an impossibly low respawn interval.
 				}
-				return 60000;
+				return Util.Random(60, 120) * 60 * 1000;
             }
 		}
 

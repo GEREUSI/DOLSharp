@@ -301,7 +301,7 @@ namespace DOL.GS.Keeps
 			else if (hookPointObj is GameKeepGuard guard)
 			{
 				guard.Component.AbstractKeep.Guards.Add(hookPointObj.ObjectID.ToString(), guard);
-				guard.RespawnInterval = Util.Random(5, 10) * 60 * 1000;
+				guard.RespawnInterval = Util.Random(60, 120) * 60 * 1000;
 			}
 			
 			hookpoint.Object = hookPointObj;
@@ -360,7 +360,7 @@ namespace DOL.GS.Keeps
 			else if (hookPointObj is GameKeepGuard guard)
 			{
 				guard.Component.AbstractKeep.Guards.Add(hookPointObj.ObjectID.ToString(), guard);
-				guard.RespawnInterval = Util.Random(5, 10) * 60 * 1000;
+				guard.RespawnInterval = Util.Random(60, 120) * 60 * 1000;
 			}
 			hookpoint.Object = hookPointObj;
 		}
